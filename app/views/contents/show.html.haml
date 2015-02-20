@@ -21,7 +21,8 @@
       %strong Тип
     .col-md-4=@content.file.content_type
 
-%a.btn.btn-warning(href="#{edit_content_path(@content)}")
+
+%a.btn.btn-warning(href="#{content_path(@content)}" data-method='delete' data-confirm='Вы действительно хотите удалить этот файл?')
   %i.glyphicon.glyphicon-trash
   %span Удалить
 %a.btn.btn-primary(href=contents_path)
