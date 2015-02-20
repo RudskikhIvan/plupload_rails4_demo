@@ -1,0 +1,55 @@
+= form_for(@content, :class=>'uploaded') do |f|
+  .form-horizontal
+    - if @content.errors.any?
+      #error_explanation.alert.alert-danger
+        %ul
+          -@content.errors.full_messages.each do |message|
+            %li= message
+    //Заголовок
+    .form-group
+      .col-sm-2.control-label
+        = f.label :title, 'Заголовок *'
+      .col-sm-8
+        = f.text_field :title, :class => 'form-control content_title'
+    //Тэги
+    .form-group
+      .col-sm-2.control-label
+        = f.label :title, 'Тэги'
+      .col-sm-8
+        = f.text_field :tags, :class => 'form-control'
+    //Файл
+    .form-group
+      .col-sm-2.control-label
+        = f.label :file, 'Файл *'
+      .col-sm-8.browse
+        %span#browse.btn.btn-default.btn-block.form-control.content_file
+          %i.glyphicon.glyphicon-plus
+          %span Обзор
+      .col-sm-8.loader.hidden
+        .name.col-sm-7.form-control-static.text-ellipsis.text-left
+        .col-sm-3
+          .progress.without-margin.m-top-5
+            .progress-bar.progress-bar-success
+        .btn.btn-warning.cancel.pull-right
+          .glyphicon.glyphicon-ban-circle
+          %span Отмена
+
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        %em.small * - обязательные поля
+
+    .actions.form-group
+      .col-sm-offset-2.col-sm-10
+        %button#submit.btn.btn-success
+          %i.glyphicon.glyphicon-ok-sign
+          %span Загрузить
+        %a.btn.btn-primary(href=contents_path)
+          %i.glyphicon.glyphicon-arrow-left
+          %span Назад
+
+:javascript
+  $(function(){
+    new App.FormUploader($('.container form'), {
+      url: '#{contents_path(:format => 'json')}'
+    });
+  })

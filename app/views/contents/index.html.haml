@@ -1,0 +1,36 @@
+- if notice
+  %p#notice.alert.alert-info=notice
+%h1 Список файлов
+
+- if @contents.blank?
+  .empty-info
+    %h3 Нет загруженных файлов
+- else
+  %table.table.table-striped
+    %thead
+      %tr
+        %th #
+        %th Заголовок
+        %th Размер
+        %th Тип
+        %th
+    %tbody
+      - @contents.each do |content|
+        %tr
+          %td=content.id
+          %td
+            %span= link_to content.title, content
+            %span.small
+              - content.tags.to_s.split(' ').each do |tag|
+                %a(href="#{contents_path(:tag => tag)}")
+                  %i.glyphicon.glyphicon-tag
+                  %span=tag
+          %td=number_to_human_size(content.file.size)
+          %td=content.file.content_type
+          %td
+            = link_to('Удалить', content, {:method => :delete, 'data-confirm' => 'Вы действительно хотите удалить этот файл?'})
+
+%a.btn.btn-primary(href=new_content_path)
+  %i.glyphicon.glyphicon-plus
+  %span Загрузить файл
+

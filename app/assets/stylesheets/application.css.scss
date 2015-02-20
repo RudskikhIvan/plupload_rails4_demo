@@ -1,0 +1,27 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap/grid";
+
+//= require_tree .
+//= require_self
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.without-margin {
+  margin: 0;
+}
+
+.m-top-5 {
+  margin-top: 5px;
+}
+
+.new_content {
+  margin-top: 100px;
+}
+
+.show_content {
+  margin: 70px 0 50px;
+}

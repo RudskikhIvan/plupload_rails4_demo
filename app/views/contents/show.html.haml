@@ -1,0 +1,32 @@
+- if notice
+  %p#notice.alert.alert-info=notice
+
+%h1 Просмотр файла
+
+.container.show_content
+  .row.show-grid
+    .col-md-2
+      %strong Заголовок
+    .col-md-4=@content.title
+  .row.show-grid
+    .col-md-2
+      %strong Теги
+    .col-md-4=@content.tags
+  .row.show-grid
+    .col-md-2
+      %strong Размер
+    .col-md-4=number_to_human_size(@content.file.size)
+  .row.show-grid
+    .col-md-2
+      %strong Тип
+    .col-md-4=@content.file.content_type
+
+%a.btn.btn-warning(href="#{edit_content_path(@content)}")
+  %i.glyphicon.glyphicon-trash
+  %span Удалить
+%a.btn.btn-primary(href=contents_path)
+  %i.glyphicon.glyphicon-arrow-left
+  %span Назад
+%a.btn.btn-success(href="#{download_content_path(@content)}")
+  %i.glyphicon.glyphicon-floppy-disk
+  %span Скачать
